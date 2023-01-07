@@ -102,7 +102,7 @@ module Hash_table = struct
     }
   end
   type t = Data.t array
-  let get_bucket key hash_table = abs(1) mod Array.length(hash_table)
+  let get_bucket key hash_table = abs(get_hash(key)) mod Array.length(hash_table)
   let put (data: Data.t) hash_table =
     let b =
       let (key, value) = data.pair in
