@@ -20,8 +20,8 @@
                                      +----+   +---------+   +-----+
     ("Pineapple","The color ....")-->| 04 |-->|Pineapple|-->|Berry|
                                      +----+   +---------+   +-----+
-                                    \
-    ("Berry", "The color is ....")-\
+                                    /
+    ("Berry", "The color is ....")-+
 
 ---
 
