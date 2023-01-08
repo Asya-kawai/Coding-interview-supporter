@@ -98,7 +98,7 @@ module Hash_table = struct
   module Data = struct
     type t = {
       pair: string * string;
-      next: string list;
+      next: string * string;
     }
   end
   type t = Data.t array
