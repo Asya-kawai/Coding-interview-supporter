@@ -1,1 +1,5 @@
 *.html
+*.o
+*.s
+*.cmi
+*.cmx
