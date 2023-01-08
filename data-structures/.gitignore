@@ -2,4 +2,6 @@
 *.o
 *.s
 *.cmi
+*.cmo
 *.cmx
+*.annot
