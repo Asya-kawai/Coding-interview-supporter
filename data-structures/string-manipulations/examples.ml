@@ -5,9 +5,9 @@
    - Ascii なのか Unicode なのか
    - ここではAsciiとする
    - Asciiであれば、文字の種類は2^7=128文字、拡張Asciiであれば種類は2^8=256文字
-   - 上記よりも長い文字列は重複する文字を含んでいるため、その時点でfalseとすることが可能   
+   - 上記よりも長い文字列は重複する文字を含んでいるため、その時点でfalseとすることが可能
 
-   Asciiで表現される文字列に対して、重複する文字が含まれるかどうかを判定するプログラム例は以下のようになる。   
+   Asciiで表現される文字列に対して、重複する文字が含まれるかどうかを判定するプログラム例は以下のように考える。
 *)
 
 
@@ -47,4 +47,22 @@ let is_unique_string str =
    ただし、128文字を超えることはないためO(128) = O(1)と言っても良い。
    また、空間計算量は末尾再帰最適化によってO(1)となっている。
 *)
-    
+
+(* --- *)
+
+(**
+   おまけ
+   小文字のアルファベット（a~z）までしか使用しない場合、int32（32ビット長）にビット演算を適用することで重複チェックもできる。
+*)
+
+let is_unique_string_using_bitwise_ope str =
+  if String.length str > 128 then false
+  else
+    let rec is_unique_string_using_bitwise_ope_i str checker rslt =
+      if String.length str <= 0 || rslt = false then rslt
+      else
+        let int_of_c = (int_of_char str.[0]) - (int_of_char 'a') in
+        if (checker land (1 lsl int_of_c)) > 0 then is_unique_string_using_bitwise_ope_i "" checker false
+        else
+          is_unique_string_using_bitwise_ope_i (String.sub str 1 (String.length str - 1)) (checker lor (1 lsl int_of_c)) true
+    in is_unique_string_using_bitwise_ope_i str 0 true
