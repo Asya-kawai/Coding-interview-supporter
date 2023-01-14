@@ -63,7 +63,7 @@ let is_permutation2 str1 str2 =
       let c = str1.[i] in
       match Hashtbl.find_opt mem_table c with
         | None -> Hashtbl.add mem_table c 1
-        | Some x -> Hashtbl.add mem_table c (x + 1)
+        | Some x -> Hashtbl.replace mem_table c (x + 1)
     done;
     let rec is_permutation2_i str mem_table rslt =
       if String.length str <= 0 || rslt = false then rslt
@@ -74,7 +74,7 @@ let is_permutation2 str1 str2 =
         | Some x -> 
           if x - 1 < 0 then is_permutation2_i str mem_table false
           else (
-            Hashtbl.add mem_table c (x - 1);
+            Hashtbl.replace mem_table c (x - 1);
             is_permutation2_i (String.sub str 1 (String.length str - 1)) mem_table true
           )
     in is_permutation2_i str2 mem_table true
